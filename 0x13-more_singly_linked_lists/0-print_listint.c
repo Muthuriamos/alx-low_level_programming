@@ -18,6 +18,10 @@ size_t print_listint(const listint_t *head)
 
 	return (n_count);
 }
+/**
+ * main - starts the code.
+ * Return: returns 0.
+ */
 int main(void)
 {
 	return (0);

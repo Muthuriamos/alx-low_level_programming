@@ -20,6 +20,10 @@ int pop_listint(listint_t **head)
 
 	return (dat);
 }
+/**
+ * main - starts code
+ * Return: always 0
+ */
 int main(void)
 {
 	return (0);

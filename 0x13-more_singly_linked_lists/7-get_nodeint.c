@@ -7,7 +7,6 @@
  * @index: Index of the node, starting at 0
  * Return: Pointer to nth node, or NULL if the node does not exist
  */
-int main(void)
 listint_t *get_nodeint_at_index(listint_t *head, unsigned int index)
 {
 	unsigned int i;

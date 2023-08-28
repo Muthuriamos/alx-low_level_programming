@@ -19,6 +19,10 @@ size_t listint_len(const listint_t *head)
 	}
 	return (count);
 }
+/**
+ * main - start code
+ * Return: always 0.
+ */
 int main(void)
 {
 	return (0);
