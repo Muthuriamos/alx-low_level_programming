@@ -36,9 +36,27 @@ list_t *add_node(list_t **head, const char *str)
 	}
 
 	new_node->len = str_len;
-
 	new_node->next = *head;
 	*head = new_node;
 
 	return (new_node);
+}
+
+/**
+ * print_list - prints a linked list
+ * @h: Pointer to the first node of the list
+ * Return: Number of nodes in the list
+ */
+size_t print_list(const list_t *h)
+{
+	size_t node_count = 0;
+
+	while (h != NULL)
+	{
+		printf("[%d] %s\n", h->len, h->str);
+		h = h->next;
+		node_count++;
+	}
+
+	return (node_count);
 }
