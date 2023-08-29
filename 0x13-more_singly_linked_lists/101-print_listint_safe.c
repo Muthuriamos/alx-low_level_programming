@@ -18,7 +18,7 @@ size_t print_listint_safe(const listint_t *head)
 		size_t d;
 		size_t q;
 		size_t inner_q;
-		size_t some_other_num = 10;
+		size_t some_other_num = 10; 
 		for (d = 0; d < num; d++)
 		{
 			if (current == list[d])
