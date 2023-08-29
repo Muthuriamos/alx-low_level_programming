@@ -20,6 +20,7 @@ listint_t **_ra(listint_t **list, size_t size, listint_t *new)
 		perror("malloc");
 		exit(98);
 	}
+
 	for (d = 0; d < size - 1; d++)
 		nlist[d] = list[d];
 	nlist[d] = new;
@@ -62,6 +63,7 @@ size_t free_listint_safe(listint_t **head)
 			}
 		}
 	}
+
 	free(list_ptr);
 	return (num);
 }
