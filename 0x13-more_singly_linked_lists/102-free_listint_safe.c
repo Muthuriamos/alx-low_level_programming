@@ -17,7 +17,7 @@ listint_t **_ra(listint_t **list, size_t size, listint_t *new)
 	nlist = malloc(size * sizeof(listint_t *));
 	if (nlist == NULL)
 	{
-		free(list);
+		perror("malloc");
 		exit(98);
 	}
 	for (d = 0; d < size - 1; d++)
@@ -47,21 +47,20 @@ size_t free_listint_safe(listint_t **head)
 	{
 		num++;
 
-		for (d = 0; d < num - 1; d++)
-		{
-			if (*head == list_ptr[d])
-			{
-				*head = NULL;
-				free(list_ptr);
-				return (num);
-			}
-		}
-
 		list_ptr = _ra(list_ptr, num, *head);
 
 		next = (*head)->next;
 		free(*head);
 		*head = next;
+
+		for (d = 0; d < num - 1; d++)
+		{
+			if (*head == list_ptr[d])
+			{
+				free(list_ptr);
+				return (num);
+			}
+		}
 	}
 	free(list_ptr);
 	return (num);
