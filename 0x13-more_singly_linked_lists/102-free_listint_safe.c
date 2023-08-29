@@ -3,67 +3,81 @@
 #include "lists.h"
 
 /**
- * _ra - reallocates memory for an array of pointers
- * @list: the old list to append
- * @size: size of the new list
- * @new: new node tp add to the new list
- * Return: Pointer to the new list
+ * looped_listint_len - Counts the number of unique nodes
+ * @head: A pointer to the head of the listint_t to check
+ * Return: If the list in not looped - 0
+ * Otherwise - the number of unique nodes in the list.
  */
-listint_t **_ra(listint_t **list, size_t size, listint_t *new)
+size_t looped_listint_len(const listint_t *head)
 {
-	listint_t **nlist;
-	size_t d;
+	const listint_t *cow, *cat;
+	size_t nodes = 1;
 
-	nlist = malloc(size * sizeof(listint_t *));
-	if (nlist == NULL)
+	if (head == NULL || head->next == NULL)
+		return (0);
+
+	cow = head->next;
+	cat = (head->next)->next;
+
+	while (cat)
 	{
-		perror("malloc");
-		exit(98);
+		if (cow == cat)
+		{
+			cow = head;
+			while (cow != cat)
+			{
+				nodes++;
+				cow = cow->next;
+
+				cat = cat->next;
+			}
+			cow = cow->next;
+			while (cow != cat)
+			{
+
+				nodes++;
+				cow = cow->next;
+			}
+
+			return (nodes);
+
+			return (nodes);
+		}
+
+		cow = cow->next;
+		cat = (cat->next)->next;
 	}
 
-	for (d = 0; d < size - 1; d++)
-		nlist[d] = list[d];
-	nlist[d] = new;
-
-	return (nlist);
+	return (0);
 }
 
 /**
- * free_listint_safe - Frees a listint_t linked list
- * @head: Double pointer to the start of the list
+ * print_listint_safe - Prints a listint_t list
+ * @head: A pointer to the head of the listint_t
  * Return: The number of nodes in the list
  */
-size_t free_listint_safe(listint_t **head)
+size_t print_listint_safe(const listint_t *head)
 {
-	size_t num = 0;
-	listint_t **list_ptr = NULL;
-	listint_t *next;
-	size_t d;
+	size_t nodes, ring = 0;
 
+	nodes = looped_listint_len(head);
 
-	if (head == NULL || *head == NULL)
-		return (num);
-
-	while (*head != NULL)
+	if (nodes == 0)
 	{
-		num++;
-
-		list_ptr = _ra(list_ptr, num, *head);
-
-		next = (*head)->next;
-		free(*head);
-		*head = next;
-
-		for (d = 0; d < num - 1; d++)
+		for (; head != NULL; nodes++)
 		{
-			if (*head == list_ptr[d])
-			{
-				free(list_ptr);
-				return (num);
-			}
+			printf("[%p] %d\n", (void *)head, head->n);
+			head = head->next;
 		}
 	}
-
-	free(list_ptr);
-	return (num);
+	else
+	{
+		for (ring = 0; ring < nodes; ring++)
+		{
+			printf("[%p] %d\n", (void *)head, head->n);
+			head = head->next;
+		}
+		printf("-> [%p] %d\n", (void *)head, head->n);
+	}
+	return (nodes);
 }
