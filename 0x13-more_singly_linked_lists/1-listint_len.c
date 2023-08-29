@@ -1,29 +1,18 @@
 #include "lists.h"
 /**
  * listint_len - a function that returns the number of elements
- * @head: pointer to the first node
+ * @h: pointer to the first node
  * Return: number of elements
  */
-size_t listint_len(const listint_t *head)
+size_t listint_len(const listint_t *h)
 {
 	size_t count = 0;
 
-	if (head == NULL)
-		return (0);
-
-	while (head != NULL)
+	while (h)
 	{
 		count++;
-
-		head = head->next;
+		h = h->next;
 	}
+
 	return (count);
-}
-/**
- * main - start code
- * Return: always 0.
- */
-int main(void)
-{
-	return (0);
 }
