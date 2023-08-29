@@ -7,24 +7,16 @@
  */
 int pop_listint(listint_t **head)
 {
-	int dat = 0;
-	listint_t *temp = NULL;
+	int dat;
+	listint_t *temp;
 
-	if (head == NULL || *head == NULL)
+	if (!head || !*head)
 		return (0);
 
-	dat = temp->n;
-	temp = *head;
-	*head = (*head)->next;
-	free(temp);
+	dat = (*head)->n;
+	temp = (*head)->next;
+	free(*head);
+	*head = temp;
 
 	return (dat);
-}
-/**
- * main - starts code
- * Return: always 0
- */
-int main(void)
-{
-	return (0);
 }
