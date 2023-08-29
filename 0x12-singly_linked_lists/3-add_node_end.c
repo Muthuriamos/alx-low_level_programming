@@ -8,71 +8,51 @@
  * @str: String to add
  * Return: NULL if it fails / starting address of the list
  */
-typedef struct list_s
-{
-	char *str;
-	struct list_s *next;
-}
-list_t;
 
 list_t *add_node_end(list_t **head, const char *str)
 {
-	list_t *new_node = (list_t *)malloc(sizeof(list_t));
-	if (new_node = NULL)
+	list_t *new_node, *temp;
+	size_t str_len = 0;
+
+	if (str == NULL)
 	{
 		return (NULL);
-	}\\nw_node->str = strdup(str);
+	}
+	while (str[str_len] != '\0')
+	{
+		str_len++;
+	}
+
+	new_node = malloc(sizeof(list_t));
+	if (new_node == NULL)
+	{
+		return (NULL);
+	}
+
+	new_node->str = strdup(str);
 	if (new_node->str == NULL)
 	{
 		free(new_node);
 		return (NULL);
 	}
 
+	new_node->len = str_len;
 	new_node->next = NULL;
 
-	if (*head == NULL)
+	temp = *head;
+
+	if (temp == NULL)
 	{
 		*head = new_node;
 	}
 	else
 	{
-		list_t *current = *head;
-		while (current->next != NULL)
+		while (temp->next != NULL)
 		{
-			current = current->next;
+			temp = temp->next;
 		}
-		current->next = new_node;
+		temp->next = new_node;
 	}
 
-	void print_list(list_t *head)
-	{
-		while (head !=NULL)
-		{
-			printf("[%ld] %s\n", strlen(head->str), head->str);
-			head = head->next;
-		}
-	}
-
-	int main(void)
-	{
-		list_t *head = NULL;
-
-		add_node_end(&head, "Anne");
-		add_node_end(&head, "Colton");
-		add_node_end(&head, "Corbin");
-		add_node_end(&head, "Daniel");
-
-		print_list(head);
-
-		while (head != NULL)
-		{
-			list_t *temp = head;
-			head = head->next;
-			free(temp->str);
-			free(temp);
-		}
-
-		return (0);
-	}
+	return (*head);
 }
-
