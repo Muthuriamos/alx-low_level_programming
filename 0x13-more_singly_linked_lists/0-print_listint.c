@@ -1,28 +1,19 @@
 #include <stdio.h>
 #include "lists.h"
 /**
- * print_listint - prints all elements of a listinit_t list
- * @head: pointer to the head of the list
+ * print_listint - Prints all elements of a listinit_t list
+ * @h: pointer to the head of the list
  * Return: The number of nodes in the list
  */
-size_t print_listint(const listint_t *head)
+size_t print_listint(const listint_t *h)
 {
 	size_t n_count = 0;
 
-	while (head != NULL)
+	while (h)
 	{
-		printf("%d\n", head->n);
-		head = head->next;
+		printf("%d\n", h->n);
 		n_count++;
+		h = h->next;
 	}
-
 	return (n_count);
-}
-/**
- * main - starts the code.
- * Return: returns 0.
- */
-int main(void)
-{
-	return (0);
 }
