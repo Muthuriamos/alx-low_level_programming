@@ -16,7 +16,7 @@ size_t print_listint_safe(const listint_t *head)
 	while (current != NULL)
 	{
 		size_t d;
-		size_t q;
+		unsigned int q;
 		size_t inner_q;
 		size_t some_other_num = 10; 
 		for (d = 0; d < num; d++)
