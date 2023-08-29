@@ -1,73 +1,72 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "lists.h"
+
 /**
- * print_listint_safe - Prints a listint_t linked list
+ * looped_listint_len - Counts the number of unique nodes
  * @head: Pointer to the start of the list
  * Return: The number of nodes in the list
  */
+size_t looped_listint_len(const listint_t *head)
+{
+	const listint_t *cow, *cat;
+	size_t nodes = 1;
+
+	if (head == NULL || head->next == NULL)
+		return (0);
+
+	cow = head->next;
+	cat = (head->next)->next;
+
+	while (cat)
+	{
+		if (cow == cat)
+		{
+			cow = head;
+			while (cow != cat)
+			{
+				nodes++;
+				cow = cow->next;
+			}
+
+			return (nodes);
+		}
+		cow = cow->next;
+		cat = (cat->next)->next;
+	}
+	return (0);
+}
+
+/**
+ * print_listint_safe - Prints a listint_t list safely
+ * @head: A pointer to the head of the listint_tlist
+ *
+ * Return: The numv=ber of nodes in the list
+ */
 size_t print_listint_safe(const listint_t *head)
 {
-	size_t num = 0;
-	const listint_t *current = head;
-	const listint_t **list = NULL;
-	const listint_t **new_list;
-	unsigned int q;
-	size_t inner_q;
-	size_t some_other_num = 10;
-
-	while (current != NULL)
+	size_t nodes, ring = 0;
 	{
-		size_t d;
-		for (d = 0; d < num; d++)
+		nodes = looped_listint_len(head);
+
+		if (nodes == 0)
 		{
-			if (current == list[d])
+			for (; head != NULL; nodes++)
 			{
-				printf("-> [%p] %d\n", (void *)current, current->n);
-				for (q = 0; q < num; q++)
-				{
-					free((void *)list[q]);
-				}
-				free(list);
-				return (num);
+				printf("[%p] %d\n", (void *)head, head->n);
+				head = head->next;
 			}
 		}
-
-		new_list = malloc((num +1) * sizeof(listint_t *));
-		if (new_list == NULL)
+		else
 		{
-			for (q = 0; q < num; q++)
+			for (ring = 0; ring < nodes; ring++)
 			{
-				free((void *)list[q]);
+				printf("[%p] %d\n", (void *)head, head->n);
+				head = head->next;
 			}
-			free(list);
-			exit(98);
-		}
-		
-		for (q = 0; q < num; q++)
-		{
-			new_list[q] = list[q];
-		}
+			printf("-> [%p] %d\n", (void *)head, head->n);
+					}
+					return (nodes);
+					}
+					}
 
-		new_list[num] = current;
-
-		if (num > 0)
-		{
-			free(list);
-		}
-
-		list = new_list;
-
-		printf("[%p] %d\n", (void *)current, current->n);
-		num++;
-		current = current->next;
-	}
-
-	for (q = 0; q < num; q++)
-	{
-		free((void *)new_list[q]);
-	}
-	free(new_list);
-
-	return (num);
-}
