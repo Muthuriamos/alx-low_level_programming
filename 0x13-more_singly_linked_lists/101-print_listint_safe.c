@@ -12,19 +12,18 @@ size_t print_listint_safe(const listint_t *head)
 	const listint_t *current = head;
 	const listint_t **list = NULL;
 	const listint_t **new_list;
-	
+	unsigned int q;
+	size_t inner_q;
+	size_t some_other_num = 10;
+
 	while (current != NULL)
 	{
 		size_t d;
-		unsigned int q;
-		size_t inner_q;
-		size_t some_other_num = 10; 
 		for (d = 0; d < num; d++)
 		{
 			if (current == list[d])
 			{
 				printf("-> [%p] %d\n", (void *)current, current->n);
-				
 				for (q = 0; q < num; q++)
 				{
 					free((void *)list[q]);
@@ -33,27 +32,32 @@ size_t print_listint_safe(const listint_t *head)
 				return (num);
 			}
 		}
-		
+
 		new_list = malloc((num +1) * sizeof(listint_t *));
 		if (new_list == NULL)
 		{
+			for (q = 0; q < num; q++)
+			{
+				free((void *)list[q]);
+			}
+			free(list);
 			exit(98);
 		}
 		
 		for (q = 0; q < num; q++)
 		{
-			for (inner_q = 0; inner_q < some_other_num; inner_q++)
-			{
-				new_list[q] = list[q];
-			}
+			new_list[q] = list[q];
 		}
-		
+
 		new_list[num] = current;
-		
-		free(list);
-		
+
+		if (num > 0)
+		{
+			free(list);
+		}
+
 		list = new_list;
-		
+
 		printf("[%p] %d\n", (void *)current, current->n);
 		num++;
 		current = current->next;
@@ -61,9 +65,9 @@ size_t print_listint_safe(const listint_t *head)
 
 	for (q = 0; q < num; q++)
 	{
-		free((void *)list[q]);
+		free((void *)new_list[q]);
 	}
-	free(list);
-	
+	free(new_list);
+
 	return (num);
 }
