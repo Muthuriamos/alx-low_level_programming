@@ -3,38 +3,32 @@
 #include "lists.h"
 /**
  * add_nodeint_end - Adds a new node at the end of a listint_t
- * @value : Value to be stored in the new node.
- * @head_ptr: pointer to the head of the list
+ * @n: Value to be stored in the new node.
+ * @head: pointer to the head of the list
  * Return: Adress of the new element ot NULL if it fails
  */
-listint_t *add_nodeint_end(listint_t **head_ptr, const int value)
+listint_t *add_nodeint_end(listint_t **head, const int n)
 {
-	listint_t *new_node, *temp;
+	listint_t *new_node;
+	listint_t *temp = *head;
 
 	new_node = malloc(sizeof(listint_t));
-	if (new_node == NULL)
-	{
-		perror("Memory allocation failed");
+	if (!new_node)
 		return (NULL);
-	}
 
-	new_node->n = value;
+	new_node->n = n;
 	new_node->next = NULL;
 
-	if (((*head_ptr) == new_node))
+	if (*head == new_node)
 	{
-		*head_ptr = new_node;
+		*head = new_node;
+		return (new_node);
 	}
-	else
-	{
-		temp = *head_ptr;
-		while (temp->next != NULL)
-		{
-			temp = temp->next;
-		}
+	while (temp->next)
+		temp = temp->next;
 
-		temp->next = new_node;
-	}
+	temp->next = new_node;
+
 	return (new_node);
 }
 
