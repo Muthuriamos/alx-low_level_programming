@@ -5,21 +5,28 @@
  * @n: Checking bits
  * @index: Which to check bit
  * Return: The value of the bit at the given ondex or -1
+ *
  */
-int get_bit(unsigned long int n, unsigned int index)
+void print_binary(unsigned long n)
 {
-	unsigned long int mask, mist;
+	unsigned long int mask = 1UL << (sizeof(unsigned long int) * 8 - 1);		int mist =0;
 
-	if (index > (sizeof(unsigned long int) * 8 - 1))
-		return (-1);
-
-	mask = 1UL << index;
-	mist = n & mask;
-
-	if (mist == mask)
-		return (1);
-
-	return (0);
+	if (n == 0)
+	{
+		_putchar('0');
+		return;
+	}
+	while (mask > 0)
+	{
+		if (n & mask)
+		{
+			mist = 1;
+			_putchar('1');
+		}
+		else if (mist)
+		{
+			_putchar('0');
+		}
+		mask >>= 1;
+	}
 }
-
-
