@@ -1,15 +1,15 @@
 #include "main.h"
 
 /**
- * get_bit -Returns the value of a bit at a given index
+ * print_binary - Prints the binary
  * @n: Checking bits
- * @index: Which to check bit
  * Return: The value of the bit at the given ondex or -1
  *
  */
 void print_binary(unsigned long n)
 {
-	unsigned long int mask = 1UL << (sizeof(unsigned long int) * 8 - 1);		int mist =0;
+	unsigned long mask = 1UL << (sizeof(unsigned long) * 8 - 1);
+	int mist = 0;
 
 	if (n == 0)
 	{
