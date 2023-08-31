@@ -8,22 +8,13 @@
  */
 int set_bit(unsigned long int *n, unsigned int index)
 {
-	if (index >= sizeof(unsigned long) * 8)
-		return (-1);
-	*n |= (1UL << index);
+	unsigned long int dice;
+
+	if (index > (sizeof(unsigned long int) * 8 - 1))
+		return (1);
+
+	dice = 1UL << index;
+	*n |= dice;
+
 	return (1);
-}
-int main(void)
-{
-	unsigned long g = 0;
-
-	if (set_bit(&g, 2) == 1)
-		printf("%lu\n", g);
-
-	if (set_bit(&g, 10) == 1)
-		printf("%lu\n", g);
-
-	printf("99\n");
-
-	return (0);
 }
