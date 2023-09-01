@@ -1,14 +1,14 @@
 #include "main.h"
 
 /**
- * get_endiannes - checks the endiannes
+ * get_endianness - checks endianness
  *
- * Return: c
+ * Return: dice
  */
-int get_endiannes(void)
+int get_endianness(void)
 {
 	unsigned int q = 1;
-	unsigned char *c = (unsigned char *)&q;
+	unsigned char *dice = (unsigned char *)&q;
 
-	return (*c == 1);
+	return (*dice == 1);
 }
