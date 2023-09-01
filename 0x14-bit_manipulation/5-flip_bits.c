@@ -7,19 +7,13 @@
  */
 unsigned int flip_bits(unsigned long int n, unsigned long int m)
 {
-	unsigned long int diff, dice;
-	unsigned int g, q;
+	unsigned long int diff = n ^ m;
+	unsigned int dice = 0;
 
-	g = 0;
-	dice = 1;
-	diff = n ^ m;
-
-	for (q = 0; q <= (sizeof(unsigned long int) * 8); q++)
+	while (diff != 0)
 	{
-		if (dice == (diff & dice))
-			g++;
-		dice >>= 1;
+		dice += diff & 1;
+		diff >>= 1;
 	}
-
-	return (g);
+	return (dice);
 }
