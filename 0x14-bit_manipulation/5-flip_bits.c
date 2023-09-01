@@ -18,7 +18,7 @@ unsigned int flip_bits(unsigned long int n, unsigned long int m)
 	{
 		if (dice == (diff & dice))
 			g++;
-		dice <<= 1;
+		dice >>= 1;
 	}
 
 	return (g);
