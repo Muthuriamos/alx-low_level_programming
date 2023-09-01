@@ -1,19 +1,18 @@
 #include "main.h"
 /**
- * get_bit - Gets the value of a bit to 1 at a given inex
- * @n: Pointer to the number you want to modify
- * @index: index of the bit you want to set
- * Return: 1 if success, -1  if error occured
+ * get_bit - Gets the value of a bit
+ * @n: the number you want to search
+ * @index: index of the bit you want to get
+ * Return: value of the bit
  */
 int get_bit(unsigned long int n, unsigned int index)
 {
-	unsigned long int take;
+	unsigned int take;
 
 	if (index > (sizeof(unsigned long int) * 8 - 1))
 		return (-1);
 
-	take = 1UL << index;
-	n = n | take;
+	take = (n >> index) & 1;
 
-	return  (1);
+	return  (take);
 }
