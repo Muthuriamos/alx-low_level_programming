@@ -3,7 +3,7 @@
 /**
  * create_file - creates an array of chars, and initializes
  * @filename: name of the file to create
- * text_content: A NULL-terminated string to write to the filename
+ * @text_content: A NULL-terminated string to write to the filename
  *
  * Return: 1 on success, -1 on failure
  */
