@@ -215,7 +215,7 @@ void elf_print_type(const unsigned char *buffer, int big_son)
  * elf_print_entry - print entry point address
  * @buffer: string containing the entry point address
  * @bit_mode: bit mode (32 or 64)
- * @big_endian: endianness (big endian if non-zero)
+ * @big_son: endianness (big endian if non-zero)
  */
 void elf_print_entry(const unsigned char *buffer, size_t bit_mode, int big_son)
 {
