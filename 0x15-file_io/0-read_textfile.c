@@ -5,7 +5,7 @@
  * @filename: A pointer to the name of the file.
  * @letters: The nummber of letters to be read and written by the function
  *
- * Return: If the function fails or file ic NULL - 0.
+ * Return: the function fails or file ic NULL - 0.
  * 0/w - the actual number of bytes the function can read and print
  */
 ssize_t read_textfile(const char *filename, size_t letters)
